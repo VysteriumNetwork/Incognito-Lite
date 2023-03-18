@@ -1,19 +1,6 @@
 import createBareServer from '@tomphttp/bare-server-node';
 import fetch from 'node-fetch';
 import http from 'node:http';
-
-console.log(`
-██████╗ ██╗   ██╗███████╗███████╗██╗   ██╗
-██╔══██╗██║   ██║██╔════╝██╔════╝╚██╗ ██╔╝
-██████╔╝██║   ██║█████╗  █████╗   ╚████╔╝ 
-██╔══██╗██║   ██║██╔══╝  ██╔══╝    ╚██╔╝  
-██████╔╝╚██████╔╝██║     ██║        ██║   
-╚═════╝  ╚═════╝ ╚═╝     ╚═╝        ╚═╝                                          
-`);
-
-// The following message MAY NOT be removed
-console.log("Incognito-Lite\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it\nunder the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nYou should have received a copy of the GNU General Public License\nalong with this program. If not, see <https://www.gnu.org/licenses/>.\n");
-
 const bare = createBareServer("/bare/");
 const server = http.createServer();
 
@@ -21,7 +8,7 @@ server.on('request', async (req, res) => {
   if(bare.shouldRoute(req)) return bare.routeRequest(req, res); 
   if(req.url.startsWith("/service/")) return res.end('OK');
 
-  const asset = await fetch("https://vyst1612-1d3fras.onrender.com" + req.url);
+  const asset = await fetch("https://vysteriumnetwork.vercel.app/" + req.url);
   const body = new Buffer.from(await asset.arrayBuffer());
   res.writeHead(asset.status, { "Content-Type": asset.headers.get("content-type").split(";")[0] });
   res.end(body);
