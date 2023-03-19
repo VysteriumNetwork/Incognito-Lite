@@ -8,7 +8,7 @@ server.on('request', async (req, res) => {
   if(bare.shouldRoute(req)) return bare.routeRequest(req, res); 
   if(req.url.startsWith("/service/")) return res.end('OK');
 
-  const asset = await fetch("https://vysteriumnetwork.vercel.app/" + req.url);
+  const asset = await fetch("https://vysteriumnetwork.github.io/index.html" + req.url);
   const body = new Buffer.from(await asset.arrayBuffer());
   res.writeHead(asset.status, { "Content-Type": asset.headers.get("content-type").split(";")[0] });
   res.end(body);
